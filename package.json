@@ -29,8 +29,7 @@
     "build:playground": "vite build playground --outDir ../dist-playground --emptyOutDir",
     "test": "vitest run",
     "test:watch": "vitest --watch",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm run build"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "toast",

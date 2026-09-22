@@ -28,7 +28,7 @@ jobs:
         run: npm test
 
       - name: Build package
-        run: npm run prepublishOnly
+        run: npm run build
 
       - name: Publish to npm
         run: npm publish --access public
