@@ -9,9 +9,9 @@ export default defineConfig({
     dts: {
         entry: ["src/index.ts"]
     },
-    sourcemap: true,
+    sourcemap: false,
     clean: true,
     treeshake: true,
-    minify: false,
+    minify: true,
     outDir: "dist"
 });
