@@ -1,12 +1,16 @@
-# LumaToast
+# 🍞 LumaToast
 
 A beautiful, lightweight, framework-agnostic toast notification library — inspired by Linear, Vercel, and Apple VisionOS.
 
-[![npm version](https://img.shields.io/npm/v/lumatoast)](https://www.npmjs.com/package/lumatoast)
-[![Node.js Version](https://img.shields.io/node/v/lumatoast)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Playground](https://img.shields.io/badge/⚡_Live_Demo-Interactive_Playground-7c3aed?style=for-the-badge&logo=vercel)](https://lumatoast.vercel.app)
+[![npm version](https://img.shields.io/npm/v/lumatoast?style=for-the-badge&color=2563eb)](https://www.npmjs.com/package/lumatoast)
+[![Node.js Version](https://img.shields.io/node/v/lumatoast?style=for-the-badge&color=16a34a)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-f59e0b.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Features
+> 🎮 **[Try the Interactive Live Playground →](https://lumatoast.vercel.app)**  
+> Test all 9 themes, mobile swipe gestures, animation styles, progress bar positions, and customization options live in your browser!
+
+---
 
 - ✨ **Glassmorphism UI** — VisionOS-inspired frosted glass design
 - 🎨 **9 built-in themes** — linear, aurora, vision, minimal, cupertino, material, terminal, github, cyberpunk
