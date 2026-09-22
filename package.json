@@ -1,6 +1,6 @@
 {
   "name": "lumatoast",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The beautiful, modern toast notification library for React, Vue, Angular, Svelte, and Vanilla JS. Lightweight, accessible, with 9 themes and mobile swipe gestures.",
   "type": "module",
   "main": "./dist/index.cjs",
