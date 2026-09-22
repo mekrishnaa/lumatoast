@@ -12,16 +12,31 @@ A beautiful, lightweight, framework-agnostic toast notification library — insp
 
 ---
 
+**LumaToast** is an ultra-lightweight, customizable toast notification and snackbar library designed for modern web applications. An elegant, framework-agnostic alternative to `sonner`, `react-hot-toast`, and `react-toastify`.
+
 - ✨ **Glassmorphism UI** — VisionOS-inspired frosted glass design
-- 🎨 **9 built-in themes** — linear, aurora, vision, minimal, cupertino, material, terminal, github, cyberpunk
-- ⚡ **Promise API** — show loading → auto-transition to success or error
-- 📱 **Mobile gestures** — swipe to dismiss, direction-aware
-- 🌙 **Dark & Light mode** — themes support both
-- ⌨️ **Keyboard accessible** — Escape to dismiss, full focus management
-- ♿ **ARIA compliant** — live regions, roles, labels
-- 📦 **Framework agnostic** — works with React, Vue, Angular, Svelte, Solid, Vanilla JS
-- 🪶 **Zero dependencies** — pure TypeScript, no external runtime deps
-- 🟢 **Node.js Support** — requires Node `>= 18.0.0` (LTS 18, 20, 22+)
+- 🎨 **9 Built-in Themes** — Linear, Aurora, Vision, Minimal, Cupertino, Material, Terminal, GitHub, Cyberpunk
+- ⚡ **Promise & Async API** — Loading toasts auto-transition to success or error
+- 📱 **Mobile Touch Gestures** — Direction-aware swipe to dismiss with spring physics
+- 🌙 **Dark & Light Mode** — Native support for both light and dark backgrounds
+- ⌨️ **Accessible & A11y** — Keyboard focus management, Escape to close, ARIA live regions
+- 📦 **100% Framework Agnostic** — Zero-wrapper support for React, Vue, Angular, Svelte, Solid, and Vanilla JS
+- 🪶 **Zero Dependencies** — Pure TypeScript, under 16KB minified, no bloated external runtime
+- 🟢 **Node.js Support** — Node `>= 18.0.0` (LTS 18, 20, 22+)
+
+---
+
+## Why LumaToast vs Other Toast Libraries?
+
+| Feature | `lumatoast` | `sonner` | `react-hot-toast` | `react-toastify` |
+|---|:---:|:---:|:---:|:---:|
+| **Framework Agnostic** | ✅ Any framework | ❌ React only | ❌ React only | ❌ React only |
+| **Built-in Themes** | ✅ **9 themes** | ❌ 1 default | ❌ 1 default | ❌ CSS themes only |
+| **Progress Bar (Top & Bottom)** | ✅ Yes | ❌ No | ❌ No | ⚠️ Bottom only |
+| **CSS Variables Customization** | ✅ 30+ tokens | ⚠️ Limited | ❌ No | ⚠️ Limited |
+| **Mobile Swipe to Dismiss** | ✅ Yes | ✅ Yes | ❌ No | ⚠️ Touch only |
+| **Zero Runtime Dependencies** | ✅ Yes | ⚠️ Multiple | ⚠️ Multiple | ⚠️ Multiple |
+| **Bundle Size** | **~15 KB** | ~18 KB | ~25 KB | ~35 KB |
 
 ---
 
