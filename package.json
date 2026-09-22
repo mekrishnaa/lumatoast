@@ -64,6 +64,9 @@
     "*.css",
     "./dist/styles.css"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@types/node": "^22.20.3",
     "tsup": "^8.5.1",

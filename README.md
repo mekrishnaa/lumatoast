@@ -3,6 +3,7 @@
 A beautiful, lightweight, framework-agnostic toast notification library — inspired by Linear, Vercel, and Apple VisionOS.
 
 [![npm version](https://img.shields.io/npm/v/lumatoast)](https://www.npmjs.com/package/lumatoast)
+[![Node.js Version](https://img.shields.io/node/v/lumatoast)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
@@ -14,8 +15,9 @@ A beautiful, lightweight, framework-agnostic toast notification library — insp
 - 🌙 **Dark & Light mode** — themes support both
 - ⌨️ **Keyboard accessible** — Escape to dismiss, full focus management
 - ♿ **ARIA compliant** — live regions, roles, labels
-- 📦 **Framework agnostic** — works with Vanilla JS, React, Vue, Angular, Svelte
+- 📦 **Framework agnostic** — works with React, Vue, Angular, Svelte, Solid, Vanilla JS
 - 🪶 **Zero dependencies** — pure TypeScript, no external runtime deps
+- 🟢 **Node.js Support** — requires Node `>= 18.0.0` (LTS 18, 20, 22+)
 
 ---
 
@@ -27,27 +29,48 @@ npm install lumatoast
 
 ---
 
-## Quick Start
+## How It Works: Setup in 3 Simple Steps
 
-### 1. Import the CSS
+LumaToast is designed around a clean separation of concerns:
 
-```js
+```
+┌─────────────────────────────────────────────────────────┐
+│ 1. App Entry Point (run ONCE at startup)                │
+│    import "lumatoast/styles.css";                       │
+│    import { initializeRenderer } from "lumatoast";      │
+│    initializeRenderer();                                │
+└───────────────────────────┬─────────────────────────────┘
+                            │ (sets up singleton container)
+                            ▼
+┌─────────────────────────────────────────────────────────┐
+│ 2. Any Component / Service / Action (ANYWHERE in app)   │
+│    import { toast } from "lumatoast";                   │
+│    toast.success("Profile saved!");                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Step 1: Import the CSS (Once at App Root)
+Add this in your root entry file (e.g. `main.tsx`, `main.ts`, `app/layout.tsx`, or global stylesheet):
+
+```ts
 import "lumatoast/styles.css";
 ```
 
-> Add this once at your app entry point (e.g. `main.ts`, `App.tsx`).
+### Step 2: Initialize the Renderer (Once at App Bootstrap)
+Call `initializeRenderer()` once when your application mounts. It sets up the toast container in the DOM and listens for events:
 
-### 2. Initialize the renderer
-
-```js
-import { initializeRenderer, toast } from "lumatoast";
+```ts
+import { initializeRenderer } from "lumatoast";
 
 initializeRenderer();
 ```
 
-### 3. Show toasts
+### Step 3: Trigger Toasts from Anywhere
+Import `toast` in any component, button handler, API callback, or utility file:
 
-```js
+```ts
+import { toast } from "lumatoast";
+
 toast.success("Profile updated!");
 toast.error("Something went wrong.");
 toast.warning("Disk space is low.");
@@ -437,73 +460,293 @@ toast.success("Custom theme!", { theme: "brand" as any });
 
 ## Framework Guides
 
+LumaToast is completely framework-agnostic. The pattern is always the same:
+1. **Import `lumatoast/styles.css`** once at the root.
+2. **Call `initializeRenderer()`** once when the app loads.
+3. **Use `toast.*()`** anywhere!
 
-### React
+---
+
+### React (Vite / CRA)
+
+In your application entry point (`src/main.tsx` or `src/index.tsx`):
 
 ```tsx
-// main.tsx
+// src/main.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+// 1. Import styles and initialize once
 import "lumatoast/styles.css";
 import { initializeRenderer } from "lumatoast";
 
 initializeRenderer();
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 ```
 
+Then trigger toasts anywhere in your components:
+
 ```tsx
-// In any component:
+// src/components/SaveButton.tsx
 import { toast } from "lumatoast";
 
-function SaveButton() {
-    const handleClick = async () => {
-        await toast.promise(saveData(), {
-            loading: { description: "Saving..." },
-            success: { description: "Saved!" },
-            error:   { description: "Error saving." }
-        });
-    };
+export function SaveButton() {
+  const handleSave = async () => {
+    await toast.promise(saveUserData(), {
+      loading: { title: "Saving", description: "Saving profile changes..." },
+      success: { title: "Saved!", description: "Profile updated successfully." },
+      error:   { title: "Error",  description: "Failed to save profile." },
+    });
+  };
 
-    return <button onClick={handleClick}>Save</button>;
+  return <button onClick={handleSave}>Save Changes</button>;
 }
 ```
 
-### Vue
+---
+
+### Next.js (App Router)
+
+Since Next.js App Router renders on the server, create a simple client-side component to initialize the renderer:
+
+```tsx
+// app/components/Toaster.tsx
+"use client";
+
+import { useEffect } from "react";
+import { initializeRenderer } from "lumatoast";
+import "lumatoast/styles.css";
+
+export function Toaster() {
+  useEffect(() => {
+    initializeRenderer();
+  }, []);
+
+  return null;
+}
+```
+
+Mount `<Toaster />` once in your root layout:
+
+```tsx
+// app/layout.tsx
+import { Toaster } from "./components/Toaster";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Toaster />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Now call `toast.success()`, `toast.error()`, etc. in any client component:
+
+```tsx
+"use client";
+import { toast } from "lumatoast";
+
+export default function Page() {
+  return <button onClick={() => toast.success("Welcome to Next.js!")}>Notify</button>;
+}
+```
+
+---
+
+### Next.js (Pages Router)
+
+In `pages/_app.tsx`:
+
+```tsx
+// pages/_app.tsx
+import type { AppProps } from "next/app";
+import { useEffect } from "react";
+import { initializeRenderer } from "lumatoast";
+import "lumatoast/styles.css";
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    initializeRenderer();
+  }, []);
+
+  return <Component {...pageProps} />;
+}
+```
+
+---
+
+### Vue 3 / Vite
+
+In `src/main.ts`:
 
 ```ts
-// main.ts
+// src/main.ts
+import { createApp } from "vue";
+import App from "./App.vue";
+
+// 1. Import styles and initialize
 import "lumatoast/styles.css";
 import { initializeRenderer } from "lumatoast";
 
 initializeRenderer();
+
 createApp(App).mount("#app");
 ```
 
+In any Vue component (`.vue`):
+
 ```vue
-<script setup>
+<script setup lang="ts">
 import { toast } from "lumatoast";
-const notify = () => toast.success("Hello from Vue!");
+
+function showToast() {
+  toast.success("Profile saved successfully!", {
+    title: "Success",
+    theme: "aurora",
+  });
+}
 </script>
+
+<template>
+  <button @click="showToast">Save</button>
+</template>
 ```
 
-### Angular
+---
+
+### Nuxt 3
+
+Create a client-side plugin `plugins/lumatoast.client.ts`:
 
 ```ts
-// main.ts
+// plugins/lumatoast.client.ts
 import "lumatoast/styles.css";
 import { initializeRenderer } from "lumatoast";
 
-initializeRenderer();
-bootstrapApplication(AppComponent, appConfig);
+export default defineNuxtPlugin(() => {
+  initializeRenderer();
+});
 ```
 
-### Vanilla JS
+---
 
+### Angular
+
+#### 1. Add Styles
+In `angular.json` under `styles`:
+```json
+"styles": [
+  "node_modules/lumatoast/dist/styles.css",
+  "src/styles.css"
+]
+```
+*(Or add `@import "lumatoast/styles.css";` directly in `src/styles.css`)*.
+
+#### 2. Initialize in `main.ts`
+```ts
+// src/main.ts
+import { bootstrapApplication } from "@angular/platform-browser";
+import { AppComponent } from "./app/app.component";
+import { initializeRenderer } from "lumatoast";
+
+initializeRenderer();
+
+bootstrapApplication(AppComponent).catch((err) => console.error(err));
+```
+
+#### 3. Use in Any Angular Component or Service
+```ts
+import { Component } from "@angular/core";
+import { toast } from "lumatoast";
+
+@Component({
+  selector: "app-root",
+  standalone: true,
+  template: `<button (click)="notify()">Show Toast</button>`,
+})
+export class AppComponent {
+  notify() {
+    toast.success("Hello from Angular!", { theme: "cupertino" });
+  }
+}
+```
+
+---
+
+### Svelte / SvelteKit
+
+In `src/routes/+layout.svelte` (or `src/main.ts`):
+
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script>
+  import { onMount } from "svelte";
+  import "lumatoast/styles.css";
+  import { initializeRenderer } from "lumatoast";
+
+  onMount(() => {
+    initializeRenderer();
+  });
+</script>
+
+<slot />
+```
+
+In any Svelte component:
+
+```svelte
+<script>
+  import { toast } from "lumatoast";
+</script>
+
+<button on:click={() => toast.success("Hello from Svelte!")}>Notify</button>
+```
+
+---
+
+### Vanilla JS / Static HTML
+
+With a bundler (Vite / Webpack / Rollup):
+```html
+<script type="module">
+  import "lumatoast/styles.css";
+  import { initializeRenderer, toast } from "lumatoast";
+
+  initializeRenderer();
+  document.querySelector("#btn").onclick = () => toast.success("Ready!");
+</script>
+```
+
+Direct script inclusion from node_modules:
 ```html
 <link rel="stylesheet" href="node_modules/lumatoast/dist/styles.css" />
 <script type="module">
-    import { initializeRenderer, toast } from "lumatoast";
-    initializeRenderer();
-    document.querySelector("#btn").onclick = () => toast.success("Hello!");
+  import { initializeRenderer, toast } from "./node_modules/lumatoast/dist/index.js";
+  initializeRenderer();
+  toast.success("Vanilla JS works!");
 </script>
 ```
+
+---
+
+## Environment & Compatibility
+
+| Environment | Supported Versions | Notes |
+|---|---|---|
+| **Node.js** | `>= 18.0.0` (18, 20, 22, 24+) | Built for modern ESM & CommonJS tooling |
+| **Browsers** | Chrome, Edge, Firefox, Safari, iOS Safari | Supports modern CSS variables and flexbox |
+| **Module Systems** | ESM (`import`) & CommonJS (`require`) | Dual-packaged with TypeScript declarations |
+| **SSR Frameworks** | Next.js, Nuxt, Remix, SvelteKit, Astro | Crash-safe on server; initialize in client lifecycle |
 
 ---
 
