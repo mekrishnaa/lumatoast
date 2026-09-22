@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-playground
 coverage
 playground/node_modules
 .DS_Store
