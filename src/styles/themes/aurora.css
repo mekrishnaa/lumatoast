@@ -1,0 +1,34 @@
+/* ================================
+   Aurora Theme
+   Purple-cyan gradient glow
+================================ */
+
+.luma-theme-aurora {
+    --luma-bg:
+        radial-gradient(circle at top left, #9333EA55, transparent 45%),
+        radial-gradient(circle at bottom right, #06B6D455, transparent 45%),
+        linear-gradient(180deg, #171B2E, #0B1020);
+    --luma-border-color: rgba(147, 51, 234, .35);
+    --luma-shadow:
+        0 0 24px rgba(147, 51, 234, .22),
+        0 12px 30px rgba(0, 0, 0, .25);
+    --luma-backdrop: blur(22px);
+
+    /* Typography */
+    --luma-title-color: #F9FAFB;
+    --luma-desc-color:  rgba(255, 255, 255, .75);
+
+    /* Progress */
+    --luma-progress-success: linear-gradient(90deg, #9333EA, #3B82F6, #14B8A6);
+    --luma-progress-error:   linear-gradient(90deg, #9333EA, #EF4444);
+    --luma-progress-warning: linear-gradient(90deg, #9333EA, #F59E0B);
+    --luma-progress-info:    linear-gradient(90deg, #9333EA, #3B82F6, #14B8A6);
+}
+
+/* Loading spinner — inherit from linear */
+.luma-theme-aurora .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}

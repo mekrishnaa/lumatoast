@@ -1,0 +1,377 @@
+/* =============================================================================
+   LumaToast — Base Styles
+   All visual values use CSS custom properties so users can override them.
+   Themes set these variables on .luma-theme-X.
+   Users can override on :root for global changes or on specific selectors.
+============================================================================= */
+
+/* ── Global variable defaults ──────────────────────────────────────────────── */
+/*    These are the fallback values when no theme variable is set.            */
+
+:root {
+    /* Card layout */
+    --luma-width:   340px;
+    --luma-radius:  18px;
+    --luma-padding: 14px 16px 18px;
+    --luma-gap:     12px;
+
+    /* Background & border */
+    --luma-bg:           rgba(17, 24, 39, 0.92);
+    --luma-border-color: rgba(255, 255, 255, .08);
+    --luma-border-width: 1px;
+    --luma-shadow:       0 8px 24px rgba(0, 0, 0, .22);
+    --luma-backdrop:     blur(20px);
+
+    /* Typography */
+    --luma-font:           inherit;
+    --luma-title-size:     15px;
+    --luma-title-weight:   600;
+    --luma-title-color:    #ffffff;
+    --luma-desc-size:      14px;
+    --luma-desc-color:     rgba(255, 255, 255, .72);
+    --luma-line-height:    1.5;
+    --luma-letter-spacing: normal;
+
+    /* Icon */
+    --luma-icon-size: 20px;
+
+    /* Close button */
+    --luma-close-color: rgba(255, 255, 255, .65);
+    --luma-close-size:  18px;
+
+    /* Action button — base (solid variant) */
+    --luma-action-bg:           rgba(255, 255, 255, .08);
+    --luma-action-color:        #ffffff;
+    --luma-action-hover-bg:     rgba(255, 255, 255, .16);
+    --luma-action-radius:       10px;
+    --luma-action-padding:      8px 12px;
+    --luma-action-size:         14px;
+    --luma-action-weight:       500;
+    --luma-action-border:       none;
+    --luma-action-hover-border: none;
+
+    /* Progress bar */
+    --luma-progress-height:  3px;
+    --luma-progress-radius:  0px;
+    --luma-progress-success: linear-gradient(90deg, #22C55E, #34D399);
+    --luma-progress-error:   linear-gradient(90deg, #EF4444, #F87171);
+    --luma-progress-warning: linear-gradient(90deg, #F59E0B, #FCD34D);
+    --luma-progress-info:    linear-gradient(90deg, #3B82F6, #60A5FA);
+    --luma-progress-loading: linear-gradient(90deg, #6B7280, #9CA3AF);
+    --luma-progress-custom:  linear-gradient(90deg, #8B5CF6, #A78BFA);
+
+    /* Accent colors (for border-left indicators etc.) */
+    --luma-accent-success: #22C55E;
+    --luma-accent-error:   #EF4444;
+    --luma-accent-warning: #F59E0B;
+    --luma-accent-info:    #3B82F6;
+
+    /* Animation durations — overridden by animationSpeed config */
+    --luma-duration-enter: 320ms;
+    --luma-duration-exit:  300ms;
+    --luma-duration-stack: 280ms;
+}
+
+/* ── Position containers ───────────────────────────────────────────────────── */
+
+.luma-toast-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    pointer-events: none;
+    padding: 16px;
+}
+
+.luma-top-left    { top: 0; left: 0; align-items: flex-start; }
+.luma-top-right   { top: 0; right: 0; align-items: flex-end; }
+.luma-bottom-left { bottom: 0; left: 0; align-items: flex-start; }
+.luma-bottom-right{ bottom: 0; right: 0; align-items: flex-end; }
+
+.luma-top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+.luma-bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+/* ── Toast wrapper ─────────────────────────────────────────────────────────── */
+
+.luma-toast {
+    pointer-events: auto;
+    position: relative;
+    margin-bottom: 12px;
+    max-height: 180px;
+    will-change: transform, opacity;
+    transform-origin: top center;
+
+    transition:
+        transform    var(--luma-duration-stack) cubic-bezier(.2,.8,.2,1),
+        opacity      220ms ease,
+        max-height   var(--luma-duration-stack) cubic-bezier(.2,.8,.2,1),
+        margin       var(--luma-duration-stack) cubic-bezier(.2,.8,.2,1),
+        padding      var(--luma-duration-stack) cubic-bezier(.2,.8,.2,1);
+}
+
+/* ── Enter animations ─────────────────────────────────────────────────────── */
+
+[data-enter="slide"] { animation: luma-kf-slide var(--luma-duration-enter) cubic-bezier(.2,.8,.2,1); }
+[data-enter="fade"]  { animation: luma-kf-fade  var(--luma-duration-enter) ease; }
+[data-enter="scale"] { animation: luma-kf-scale var(--luma-duration-enter) cubic-bezier(.2,.8,.2,1); }
+[data-enter="bounce"]{ animation: luma-kf-bounce var(--luma-duration-enter) cubic-bezier(.34,1.56,.64,1); }
+[data-enter="none"]  { animation: none; }
+
+@keyframes luma-kf-slide {
+    from { opacity: 0; transform: translateY(-12px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0)     scale(1);   }
+}
+
+@keyframes luma-kf-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes luma-kf-scale {
+    from { opacity: 0; transform: scale(.85); }
+    to   { opacity: 1; transform: scale(1);   }
+}
+
+@keyframes luma-kf-bounce {
+    from { opacity: 0; transform: scale(.75); }
+    to   { opacity: 1; transform: scale(1);   }
+}
+
+/* ── Exit states ──────────────────────────────────────────────────────────── */
+
+.luma-toast-exit {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+}
+
+/* Slide exit: fly off to the right */
+[data-exit="slide"].luma-toast-exit {
+    transform: translateX(32px) scale(.96);
+}
+
+/* Fade exit: just opacity (max-height collapse from base still applies) */
+[data-exit="fade"].luma-toast-exit {
+    transform: none;
+}
+
+/* None exit: instant — remove transitions */
+[data-exit="none"].luma-toast-exit {
+    transition: none !important;
+}
+
+/* ── Toast card (the visual surface) ──────────────────────────────────────── */
+
+.luma-toast-card {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--luma-gap);
+
+    width: var(--luma-width);
+    padding: var(--luma-padding);
+    border-radius: var(--luma-radius);
+
+    background: var(--luma-bg);
+    border: var(--luma-border-width) solid var(--luma-border-color);
+    box-shadow: var(--luma-shadow);
+    backdrop-filter: var(--luma-backdrop);
+
+    font-family: var(--luma-font);
+    letter-spacing: var(--luma-letter-spacing);
+
+    cursor: grab;
+    user-select: none;
+
+    transition:
+        transform 220ms cubic-bezier(.2,.8,.2,1),
+        box-shadow 220ms ease;
+}
+
+/* ── Content sections ─────────────────────────────────────────────────────── */
+
+.luma-toast-icon {
+    font-size: var(--luma-icon-size);
+    line-height: 1.2;
+    flex-shrink: 0;
+    width: var(--luma-icon-size);
+    height: var(--luma-icon-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.luma-toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.luma-toast-title {
+    font-size: var(--luma-title-size);
+    font-weight: var(--luma-title-weight);
+    color: var(--luma-title-color);
+    margin-bottom: 4px;
+}
+
+.luma-toast-description {
+    font-size: var(--luma-desc-size);
+    color: var(--luma-desc-color);
+    line-height: var(--luma-line-height);
+}
+
+.luma-toast-close {
+    border: none;
+    background: transparent;
+    color: var(--luma-close-color);
+    font-size: var(--luma-close-size);
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0 2px;
+}
+
+/* ── Action button — base ─────────────────────────────────────────────────── */
+
+.luma-toast-action {
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+
+    font-size: var(--luma-action-size);
+    font-weight: var(--luma-action-weight);
+    padding: var(--luma-action-padding);
+    border-radius: var(--luma-action-radius);
+    color: var(--luma-action-color);
+    border: var(--luma-action-border);
+
+    transition: background .2s, box-shadow .2s, border-color .2s;
+}
+
+/* ── Action button — variants ─────────────────────────────────────────────── */
+
+/* Solid (default) — filled background */
+.luma-action-solid {
+    background: var(--luma-action-bg);
+}
+
+.luma-action-solid:hover {
+    background: var(--luma-action-hover-bg);
+}
+
+/* Outline — transparent with border */
+.luma-action-outline {
+    background: transparent;
+    border: 1px solid var(--luma-border-color);
+    color: var(--luma-title-color);
+}
+
+.luma-action-outline:hover {
+    background: var(--luma-action-bg);
+    border-color: var(--luma-action-color);
+}
+
+/* Ghost — no background, no border, just text */
+.luma-action-ghost {
+    background: transparent;
+    border: none;
+    color: var(--luma-title-color);
+    padding-left: 0;
+    padding-right: 0;
+    opacity: .85;
+}
+
+.luma-action-ghost:hover {
+    opacity: 1;
+}
+
+/* ── Keyboard focus ───────────────────────────────────────────────────────── */
+
+.luma-toast-action:focus-visible,
+.luma-toast-close:focus-visible {
+    outline: 2px solid #60A5FA;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+.luma-toast-action,
+.luma-toast-close {
+    transition: outline-color .2s ease, background .2s ease;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────────────── */
+
+.luma-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--luma-progress-height);
+    width: 100%;
+    border-radius: var(--luma-progress-radius);
+    transform-origin: left center;
+
+    animation-name: luma-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+/* Progress bar at top of card */
+.luma-progress-top {
+    top: 0;
+    bottom: auto;
+}
+
+/* Progress bar color per toast type */
+.luma-success .luma-progress  { background: var(--luma-progress-success); }
+.luma-error   .luma-progress  { background: var(--luma-progress-error);   }
+.luma-warning .luma-progress  { background: var(--luma-progress-warning); }
+.luma-info    .luma-progress  { background: var(--luma-progress-info);    }
+.luma-loading .luma-progress  { background: var(--luma-progress-loading); }
+.luma-custom  .luma-progress  { background: var(--luma-progress-custom);  }
+
+@keyframes luma-progress {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .luma-toast,
+    .luma-toast-card,
+    .luma-toast-exit {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    [data-enter] {
+        animation: none !important;
+    }
+
+    .luma-loading-icon {
+        animation: none !important;
+    }
+
+    .luma-toast-card:hover {
+        transform: none !important;
+    }
+}

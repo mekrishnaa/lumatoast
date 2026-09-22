@@ -1,0 +1,40 @@
+/* ================================
+   Vision Theme
+   Apple VisionOS inspired — deep blue glassmorphism
+================================ */
+
+.luma-theme-vision {
+    --luma-bg:
+        linear-gradient(
+            135deg,
+            rgba(12, 16, 32, .96),
+            rgba(18, 24, 45, .96)
+        );
+    --luma-border-color: rgba(96, 165, 250, .25);
+    --luma-shadow:
+        0 0 18px rgba(59, 130, 246, .15),
+        0 12px 40px rgba(0, 0, 0, .28);
+    --luma-backdrop: blur(22px);
+
+    /* Typography */
+    --luma-title-color: #E0F2FE;
+    --luma-desc-color:  rgba(224, 242, 254, .72);
+
+    /* Action */
+    --luma-action-bg:       rgba(96, 165, 250, .12);
+    --luma-action-color:    #BAE6FD;
+    --luma-action-hover-bg: rgba(96, 165, 250, .22);
+
+    /* Progress */
+    --luma-progress-success: linear-gradient(90deg, #2563EB, #7C3AED);
+    --luma-progress-error:   linear-gradient(90deg, #7C3AED, #EF4444);
+    --luma-progress-warning: linear-gradient(90deg, #2563EB, #F59E0B);
+    --luma-progress-info:    linear-gradient(90deg, #2563EB, #7C3AED);
+}
+
+.luma-theme-vision .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}

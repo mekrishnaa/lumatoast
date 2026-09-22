@@ -1,0 +1,44 @@
+/* ================================
+   Terminal Theme
+   Monospace green-on-black
+================================ */
+
+.luma-theme-terminal {
+    --luma-bg:           #0B0F0C;
+    --luma-border-color: #16A34A;
+    --luma-border-width: 1px;
+    --luma-shadow:       0 4px 16px rgba(22, 163, 74, .15);
+    --luma-backdrop:     none;
+    --luma-radius:       8px;
+    --luma-font:         "JetBrains Mono", "Fira Code", monospace;
+
+    /* Typography */
+    --luma-title-color:  #22C55E;
+    --luma-title-weight: 700;
+    --luma-desc-color:   #A7F3D0;
+
+    /* Close */
+    --luma-close-color: #4ADE80;
+
+    /* Action */
+    --luma-action-bg:       rgba(34, 197, 94, .12);
+    --luma-action-color:    #22C55E;
+    --luma-action-hover-bg: rgba(34, 197, 94, .22);
+    --luma-action-border:   1px solid rgba(34, 197, 94, .35);
+    --luma-action-radius:   4px;
+
+    /* Progress */
+    --luma-progress-success: #22C55E;
+    --luma-progress-error:   #F87171;
+    --luma-progress-warning: #FCD34D;
+    --luma-progress-info:    #22C55E;
+    --luma-progress-loading: #4ADE80;
+    --luma-progress-custom:  #22C55E;
+}
+
+.luma-theme-terminal .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}

@@ -1,0 +1,65 @@
+/* ================================
+   Linear Theme
+   Dark glassmorphism, Linear-inspired
+================================ */
+
+.luma-theme-linear {
+    --luma-bg:
+        linear-gradient(
+            180deg,
+            rgba(31, 41, 55, .92),
+            rgba(17, 24, 39, .92)
+        );
+    --luma-border-color: rgba(255, 255, 255, .08);
+    --luma-shadow:
+        0 8px 24px rgba(0, 0, 0, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+    --luma-backdrop: blur(20px);
+    --luma-radius: 18px;
+
+    /* Typography */
+    --luma-title-color: #ffffff;
+    --luma-desc-color:  rgba(255, 255, 255, .72);
+
+    /* Action button */
+    --luma-action-bg:       rgba(255, 255, 255, .08);
+    --luma-action-color:    #ffffff;
+    --luma-action-hover-bg: rgba(255, 255, 255, .16);
+    --luma-action-radius:   10px;
+
+    /* Close button */
+    --luma-close-color: rgba(255, 255, 255, .65);
+
+    /* Accent (border-left indicators) */
+    --luma-accent-success: #22C55E;
+    --luma-accent-error:   #EF4444;
+    --luma-accent-warning: #F59E0B;
+    --luma-accent-info:    #3B82F6;
+}
+
+/* Type-specific left border accents */
+.luma-theme-linear.luma-success .luma-toast-card { border-left: 4px solid var(--luma-accent-success); }
+.luma-theme-linear.luma-error   .luma-toast-card { border-left: 4px solid var(--luma-accent-error);   }
+.luma-theme-linear.luma-warning .luma-toast-card { border-left: 4px solid var(--luma-accent-warning); }
+.luma-theme-linear.luma-info    .luma-toast-card { border-left: 4px solid var(--luma-accent-info);    }
+
+/* Hover lift */
+.luma-theme-linear .luma-toast-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 36px rgba(0, 0, 0, .32),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+/* Loading spinner */
+.luma-theme-linear .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}
+
+@keyframes luma-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

@@ -1,0 +1,11 @@
+@import "./base.css";
+
+@import "./themes/linear.css";
+@import "./themes/aurora.css";
+@import "./themes/minimal.css";
+@import "./themes/vision.css";
+@import "./themes/github.css";
+@import "./themes/cupertino.css";
+@import "./themes/cyberpunk.css";
+@import "./themes/material.css";
+@import "./themes/terminal.css";

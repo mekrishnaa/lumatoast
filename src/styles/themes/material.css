@@ -1,0 +1,39 @@
+/* ================================
+   Material Theme
+   Google Material Design 3
+================================ */
+
+.luma-theme-material {
+    --luma-bg:           #202124;
+    --luma-border-color: transparent;
+    --luma-border-width: 0px;
+    --luma-shadow:       0 4px 12px rgba(0, 0, 0, .35);
+    --luma-backdrop:     none;
+    --luma-radius:       14px;
+
+    /* Typography */
+    --luma-title-color:  #FFFFFF;
+    --luma-title-weight: 500;
+    --luma-desc-color:   #BDC1C6;
+
+    /* Action */
+    --luma-action-bg:       transparent;
+    --luma-action-color:    #8AB4F8;
+    --luma-action-hover-bg: rgba(138, 180, 248, .08);
+    --luma-action-weight:   600;
+
+    /* Progress */
+    --luma-progress-success: #81C995;
+    --luma-progress-error:   #F28B82;
+    --luma-progress-warning: #FDD663;
+    --luma-progress-info:    #8AB4F8;
+    --luma-progress-loading: #9AA0A6;
+    --luma-progress-custom:  #C58AF9;
+}
+
+.luma-theme-material .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}

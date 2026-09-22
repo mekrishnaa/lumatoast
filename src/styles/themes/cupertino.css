@@ -1,0 +1,41 @@
+/* ================================
+   Cupertino Theme
+   Apple iOS / macOS inspired
+================================ */
+
+.luma-theme-cupertino {
+    --luma-bg:           rgba(255, 255, 255, 0.9);
+    --luma-border-color: rgba(255, 255, 255, 0.6);
+    --luma-shadow:       0 12px 32px rgba(0, 0, 0, .12);
+    --luma-backdrop:     blur(34px);
+    --luma-radius:       24px;
+
+    /* Typography */
+    --luma-title-color:  #111827;
+    --luma-title-weight: 700;
+    --luma-desc-color:   #374151;
+
+    /* Close button */
+    --luma-close-color: #6B7280;
+
+    /* Action */
+    --luma-action-bg:       #007AFF;
+    --luma-action-color:    #ffffff;
+    --luma-action-hover-bg: #0062CC;
+    --luma-action-radius:   14px;
+
+    /* Progress */
+    --luma-progress-success: #34C759;
+    --luma-progress-error:   #FF3B30;
+    --luma-progress-warning: #FF9500;
+    --luma-progress-info:    #007AFF;
+    --luma-progress-loading: #8E8E93;
+    --luma-progress-custom:  #AF52DE;
+}
+
+.luma-theme-cupertino .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}

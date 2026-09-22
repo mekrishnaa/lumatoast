@@ -1,0 +1,148 @@
+/* ==================================
+   Cyberpunk Theme
+   Neon pink + cyan on deep dark surface
+================================== */
+
+.luma-theme-cyberpunk {
+    --luma-bg:
+        linear-gradient(
+            135deg,
+            rgba(12, 8, 28, 0.96),
+            rgba(24, 10, 40, 0.96)
+        );
+    --luma-border-color: rgba(255, 0, 153, .45);
+    --luma-border-width: 1px;
+    --luma-shadow:
+        0 0 12px rgba(255, 0, 153, .25),
+        0 0 28px rgba(0, 229, 255, .12),
+        inset 0 0 12px rgba(255, 255, 255, .03);
+    --luma-backdrop: blur(18px);
+    --luma-radius: 16px;
+    --luma-letter-spacing: 0.3px;
+
+    /* Typography */
+    --luma-title-color:  #ffffff;
+    --luma-title-weight: 700;
+    --luma-desc-color:   rgba(235, 235, 255, .82);
+
+    /* Close */
+    --luma-close-color: #00E5FF;
+
+    /* Action */
+    --luma-action-bg:           rgba(255, 0, 153, .12);
+    --luma-action-color:        #ff4dc4;
+    --luma-action-hover-bg:     rgba(255, 0, 153, .22);
+    --luma-action-border:       1px solid rgba(255, 0, 153, .35);
+    --luma-action-hover-border: 1px solid rgba(255, 0, 153, .55);
+    --luma-action-radius:       10px;
+
+    /* Progress */
+    --luma-progress-success: linear-gradient(90deg, #00ff85, #00E5FF);
+    --luma-progress-error:   linear-gradient(90deg, #ff3b5c, #ff0080);
+    --luma-progress-warning: linear-gradient(90deg, #ffd500, #ff9500);
+    --luma-progress-info:    linear-gradient(90deg, #00e5ff, #8b5cf6);
+    --luma-progress-loading: linear-gradient(90deg, #ff0080, #8b5cf6, #00e5ff);
+    --luma-progress-custom:  linear-gradient(90deg, #ff0080, #8b5cf6, #00e5ff);
+}
+
+/* Neon top-glow line (pseudo-element — can't be a CSS var) */
+.luma-theme-cyberpunk .luma-toast-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff0080, #8b5cf6, #00e5ff);
+    box-shadow: 0 0 10px #ff0080;
+}
+
+/* Neon breathing glow */
+.luma-theme-cyberpunk .luma-toast-card {
+    animation: cyberpunk-pulse 3s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 12px rgba(255, 0, 153, .25),
+            0 0 28px rgba(0, 229, 255, .12),
+            inset 0 0 12px rgba(255, 255, 255, .03);
+    }
+    50% {
+        box-shadow:
+            0 0 22px rgba(255, 0, 153, .40),
+            0 0 40px rgba(0, 229, 255, .25),
+            inset 0 0 14px rgba(255, 255, 255, .05);
+    }
+}
+
+/* Hover */
+.luma-theme-cyberpunk .luma-toast-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 24px rgba(255, 0, 153, .45),
+        0 0 44px rgba(0, 229, 255, .32);
+}
+
+/* Animated progress (special — multi-keyframe) */
+.luma-theme-cyberpunk .luma-progress {
+    background:
+        linear-gradient(90deg, #ff0080, #8b5cf6, #00e5ff, #ff0080);
+    background-size: 250% 100%;
+    animation:
+        luma-progress linear forwards,
+        cyberpunk-gradient 2s linear infinite;
+}
+
+@keyframes cyberpunk-gradient {
+    from { background-position: 0% 0; }
+    to   { background-position: 250% 0; }
+}
+
+/* Spinner glow */
+.luma-theme-cyberpunk .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    filter:
+        drop-shadow(0 0 4px #00E5FF)
+        drop-shadow(0 0 10px #00E5FF);
+    animation:
+        luma-spin 1s linear infinite,
+        cyberpunk-spinner-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-spinner-glow {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 4px #00E5FF)
+            drop-shadow(0 0 10px #00E5FF);
+    }
+    50% {
+        filter:
+            drop-shadow(0 0 8px #FF0080)
+            drop-shadow(0 0 18px #FF0080);
+    }
+}
+
+/* Type-specific glow overrides */
+.luma-theme-cyberpunk.luma-success .luma-toast-card {
+    border-left: 4px solid #00ff85;
+    box-shadow: 0 0 18px rgba(34,197,94,.35), 0 0 30px rgba(34,197,94,.18);
+}
+
+.luma-theme-cyberpunk.luma-error .luma-toast-card {
+    border-left: 4px solid #ff3b5c;
+    box-shadow: 0 0 18px rgba(239,68,68,.35), 0 0 30px rgba(239,68,68,.18);
+}
+
+.luma-theme-cyberpunk.luma-warning .luma-toast-card {
+    border-left: 4px solid #ffd500;
+    box-shadow: 0 0 18px rgba(245,158,11,.35), 0 0 30px rgba(245,158,11,.18);
+}
+
+.luma-theme-cyberpunk.luma-info .luma-toast-card {
+    border-left: 4px solid #00e5ff;
+    box-shadow: 0 0 18px rgba(59,130,246,.35), 0 0 30px rgba(59,130,246,.18);
+}

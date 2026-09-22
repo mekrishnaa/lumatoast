@@ -1,0 +1,74 @@
+{
+  "name": "lumatoast",
+  "version": "0.1.0",
+  "description": "Beautiful animated toast notification library inspired by Linear and VisionOS.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite playground --host",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build"
+  },
+  "keywords": [
+    "toast",
+    "notification",
+    "typescript",
+    "javascript",
+    "animation",
+    "ui",
+    "toast-library",
+    "toast-notification",
+    "vanilla-js",
+    "angular",
+    "react",
+    "vue",
+    "svelte",
+    "solidjs",
+    "web-components",
+    "glassmorphism",
+    "accessible"
+  ],
+  "author": "Krishna Kumar",
+  "license": "MIT",
+  "homepage": "https://github.com/mekrishnaa/lumatoast#readme",
+  "bugs": {
+    "url": "https://github.com/mekrishnaa/lumatoast/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mekrishnaa/lumatoast.git"
+  },
+  "sideEffects": [
+    "*.css",
+    "./dist/styles.css"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.3.6",
+    "vitest": "^3.2.7"
+  }
+}

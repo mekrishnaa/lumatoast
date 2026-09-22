@@ -1,0 +1,51 @@
+/* ================================
+   Minimal Theme
+   Clean white, light mode
+================================ */
+
+.luma-theme-minimal {
+    --luma-bg:           #ffffff;
+    --luma-border-color: #E5E7EB;
+    --luma-border-width: 1px;
+    --luma-shadow:       0 8px 18px rgba(0, 0, 0, .08);
+    --luma-backdrop:     none;
+    --luma-radius:       14px;
+
+    /* Typography */
+    --luma-title-color: #111827;
+    --luma-desc-color:  #4B5563;
+
+    /* Close button */
+    --luma-close-color: #6B7280;
+
+    /* Action */
+    --luma-action-bg:       #F3F4F6;
+    --luma-action-color:    #111827;
+    --luma-action-hover-bg: #E5E7EB;
+
+    /* Progress */
+    --luma-progress-success: #22C55E;
+    --luma-progress-error:   #EF4444;
+    --luma-progress-warning: #F59E0B;
+    --luma-progress-info:    #3B82F6;
+    --luma-progress-loading: #9CA3AF;
+    --luma-progress-custom:  #8B5CF6;
+
+    /* Accent */
+    --luma-accent-success: #22C55E;
+    --luma-accent-error:   #EF4444;
+    --luma-accent-warning: #F59E0B;
+    --luma-accent-info:    #3B82F6;
+}
+
+/* Override description color for better light-theme readability */
+.luma-theme-minimal .luma-toast-description {
+    color: var(--luma-desc-color);
+}
+
+.luma-theme-minimal .luma-loading-icon {
+    display: block;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: luma-spin 1s linear infinite;
+}
